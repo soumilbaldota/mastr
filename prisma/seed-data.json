@@ -1,0 +1,244 @@
+{
+  "organizations": [
+    {
+      "id": "org-hpml",
+      "name": "HPML Course Team"
+    }
+  ],
+  "teams": [
+    {
+      "id": "team-research",
+      "name": "Model Research",
+      "organizationId": "org-hpml",
+      "discordChannel": "hpml-research"
+    },
+    {
+      "id": "team-systems",
+      "name": "Systems & Performance",
+      "organizationId": "org-hpml",
+      "discordChannel": "hpml-systems"
+    },
+    {
+      "id": "team-infra",
+      "name": "Infrastructure & DevOps",
+      "organizationId": "org-hpml",
+      "discordChannel": "hpml-infra"
+    }
+  ],
+  "developers": [
+    {
+      "id": "dev-soumil",
+      "name": "Soumil Baldota",
+      "email": "soumil@hpml.dev",
+      "role": "DevOps & Systems Engineer",
+      "teamId": "team-infra",
+      "discordUserId": null
+    },
+    {
+      "id": "dev-ansen",
+      "name": "Ansen Shia",
+      "email": "ansen@hpml.dev",
+      "role": "ML Systems Engineer",
+      "teamId": "team-research",
+      "discordUserId": null
+    },
+    {
+      "id": "dev-david",
+      "name": "David G",
+      "email": "david@hpml.dev",
+      "role": "Research Engineer",
+      "teamId": "team-research",
+      "discordUserId": null
+    },
+    {
+      "id": "dev-tony",
+      "name": "Tony Tian",
+      "email": "tony@hpml.dev",
+      "role": "ML Engineer",
+      "teamId": "team-research",
+      "discordUserId": null
+    },
+    {
+      "id": "dev-giorgio",
+      "name": "Giorgio",
+      "email": "giorgio@hpml.dev",
+      "role": "Performance Engineer",
+      "teamId": "team-systems",
+      "discordUserId": null
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-hpml",
+      "name": "HPML Course Project",
+      "description": "High Performance Machine Learning systems benchmarking and serving stack evaluation.",
+      "status": "active",
+      "startDate": "2026-02-01",
+      "targetDate": "2026-03-30"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-1",
+      "name": "Provision GCP Project & IAM Setup",
+      "description": "Set up GCP project, enable APIs, configure IAM roles for research team.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-soumil",
+      "status": "in_progress",
+      "duration": 2,
+      "progress": 70,
+      "priority": "critical"
+    },
+    {
+      "id": "task-2",
+      "name": "Fix Ansen GCP Access Issue",
+      "description": "Debug IAM permissions and ensure Ansen can SSH and launch GPU instances.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-soumil",
+      "status": "in_progress",
+      "duration": 1,
+      "progress": 40,
+      "priority": "critical"
+    },
+    {
+      "id": "task-3",
+      "name": "Deploy Vidur on GCP GPU Instance",
+      "description": "Set up environment, install dependencies, validate model serving.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-ansen",
+      "status": "blocked",
+      "duration": 3,
+      "progress": 20,
+      "priority": "critical"
+    },
+    {
+      "id": "task-4",
+      "name": "Measure Vidur Throughput & Latency",
+      "description": "Benchmark Vidur under synthetic load and record tokens/sec and P99 latency.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-ansen",
+      "status": "not_started",
+      "duration": 3,
+      "progress": 0,
+      "priority": "high"
+    },
+    {
+      "id": "task-5",
+      "name": "Deploy Sarathi Serve",
+      "description": "Provision environment and deploy Sarathi Serve for benchmarking.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-soumil",
+      "status": "in_progress",
+      "duration": 3,
+      "progress": 50,
+      "priority": "high"
+    },
+    {
+      "id": "task-6",
+      "name": "Measure Sarathi Serve Performance",
+      "description": "Collect throughput, latency, GPU utilization, and memory footprint.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-soumil",
+      "status": "not_started",
+      "duration": 3,
+      "progress": 0,
+      "priority": "high"
+    },
+    {
+      "id": "task-7",
+      "name": "vLLM Deployment & Baseline Benchmark",
+      "description": "Deploy vLLM and collect baseline performance metrics.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-tony",
+      "status": "in_progress",
+      "duration": 4,
+      "progress": 30,
+      "priority": "high"
+    },
+    {
+      "id": "task-8",
+      "name": "Independent Experiment: Quantization Study",
+      "description": "Run quantization experiments unrelated to serving benchmark tasks.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-tony",
+      "status": "in_progress",
+      "duration": 5,
+      "progress": 45,
+      "priority": "medium"
+    },
+    {
+      "id": "task-9",
+      "name": "vLLM Performance Measurement",
+      "description": "Measure scaling efficiency and batching impact for vLLM.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-giorgio",
+      "status": "not_started",
+      "duration": 4,
+      "progress": 0,
+      "priority": "high"
+    },
+    {
+      "id": "task-10",
+      "name": "Bottleneck Analysis & Profiling",
+      "description": "Use profiling tools to identify GPU, CPU, and memory bottlenecks.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-giorgio",
+      "status": "not_started",
+      "duration": 5,
+      "progress": 0,
+      "priority": "critical"
+    }
+  ],
+  "taskDependencies": [
+    { "dependentId": "task-3", "dependencyId": "task-2" },
+    { "dependentId": "task-4", "dependencyId": "task-3" },
+    { "dependentId": "task-6", "dependencyId": "task-5" },
+    { "dependentId": "task-9", "dependencyId": "task-7" },
+    { "dependentId": "task-9", "dependencyId": "task-4" },
+    { "dependentId": "task-10", "dependencyId": "task-9" }
+  ],
+  "blockers": [
+    {
+      "id": "blocker-1",
+      "taskId": "task-3",
+      "reportedById": "dev-ansen",
+      "assignedToId": "dev-soumil",
+      "description": "Cannot access GCP project. SSH permission denied and GPU quota not visible.",
+      "status": "open",
+      "priority": "critical"
+    }
+  ],
+  "checkIns": [
+    {
+      "id": "checkin-1",
+      "developerId": "dev-ansen",
+      "date": "2026-02-14T00:00:00.000Z",
+      "transcript": "I tried deploying Vidur but I cannot access the GCP project. SSH keeps failing and I don't see GPU quota. I'm blocked until access is fixed.",
+      "summary": "Ansen is blocked on GCP access preventing Vidur deployment.",
+      "mood": "frustrated",
+      "items": [
+        {
+          "type": "blocker",
+          "content": "No GCP access / GPU quota visibility",
+          "taskId": "task-3"
+        }
+      ]
+    },
+    {
+      "id": "checkin-2",
+      "developerId": "dev-soumil",
+      "date": "2026-02-14T00:00:00.000Z",
+      "transcript": "Working on fixing Ansen's IAM permissions and GPU quota issue. Sarathi Serve deployment is halfway done. Will prioritize unblocking GCP access first.",
+      "summary": "Soumil is addressing IAM/GCP blocker and progressing on Sarathi Serve deployment.",
+      "mood": "focused",
+      "items": [
+        {
+          "type": "progress",
+          "content": "IAM debugging for GCP access",
+          "taskId": "task-2",
+          "progress": 40
+        }
+      ]
+    }
+  ]
+}

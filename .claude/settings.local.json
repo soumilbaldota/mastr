@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:elevenlabs.io)",
+      "WebFetch(domain:discordjs.guide)",
+      "WebFetch(domain:docs.discord.com)",
+      "WebFetch(domain:www.geeksforgeeks.org)",
+      "WebFetch(domain:js.cytoscape.org)",
+      "WebSearch",
+      "WebFetch(domain:discord.com)",
+      "WebFetch(domain:frankfu.blog)",
+      "Bash(node -e:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx next build:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
