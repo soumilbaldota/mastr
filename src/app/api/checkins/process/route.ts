@@ -82,15 +82,21 @@ export async function POST(request: Request) {
   }
 
   // Fetch open blockers for this developer
+  // Include both: blockers they reported AND blockers assigned to them
   const openBlockers = await prisma.blocker.findMany({
     where: {
-      reportedById: checkIn.developerId,
       status: "open",
+      OR: [
+        { reportedById: checkIn.developerId }, // Blockers they reported
+        { assignedToId: checkIn.developerId }, // Blockers assigned to them to fix
+      ],
     },
     select: {
       id: true,
       description: true,
       priority: true,
+      reportedById: true,
+      assignedToId: true,
     },
   });
 

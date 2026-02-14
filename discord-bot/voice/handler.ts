@@ -280,13 +280,19 @@ function startListening(
   const receiver = connection.receiver;
 
   receiver.speaking.on("start", (speakingUserId) => {
-    if (speakingUserId !== userId) return;
-    if (bridge.busy) return; // Don't listen while processing
+    if (speakingUserId !== userId) {
+      console.log(`[Audio] Ignoring audio from other user: ${speakingUserId}`);
+      return;
+    }
+    if (bridge.busy) {
+      console.log("[Audio] Agent is busy, ignoring audio");
+      return;
+    }
 
     const opusStream = receiver.subscribe(speakingUserId, {
       end: {
         behavior: EndBehaviorType.AfterSilence,
-        duration: 1500, // 1.5s of silence = end of utterance
+        duration: 2000, // Increased from 1.5s to 2s - reduces interruptions
       },
     });
 
@@ -321,9 +327,18 @@ function startListening(
 
       const fullAudio = Buffer.concat(audioChunks);
 
-      // Minimum audio length check (~0.5 seconds at 16kHz mono 16-bit = 16000 bytes)
-      if (fullAudio.length < 16000) {
-        console.log("Audio too short, skipping...");
+      // Minimum audio length check (~1 second at 16kHz mono 16-bit = 32000 bytes)
+      // Increased from 0.5s to 1s to filter out background noise better
+      if (fullAudio.length < 32000) {
+        console.log(
+          `[Audio] Too short (${(fullAudio.length / 32000).toFixed(1)}s), skipping...`
+        );
+        return;
+      }
+
+      // Check again if bridge is busy (race condition prevention)
+      if (bridge.busy) {
+        console.log("[Audio] Agent became busy, skipping this audio");
         return;
       }
 

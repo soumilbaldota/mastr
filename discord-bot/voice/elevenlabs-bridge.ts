@@ -61,11 +61,12 @@ export class VoiceBridge {
    */
   async processUtterance(pcmAudio: Buffer): Promise<void> {
     if (this.isProcessing) {
-      console.log("Already processing an utterance, skipping...");
+      console.log("[Pipeline] Already processing, skipping this audio");
       return;
     }
 
     this.isProcessing = true;
+    console.log("[Pipeline] Started processing utterance");
 
     try {
       // Step 1: Speech-to-Text
@@ -73,7 +74,15 @@ export class VoiceBridge {
       const transcript = await this.speechToText(pcmAudio);
 
       if (!transcript || transcript.trim().length === 0) {
-        console.log("Empty transcript, skipping...");
+        console.log("[STT] Empty transcript, skipping...");
+        this.isProcessing = false;
+        return;
+      }
+
+      // Filter out very short transcripts (likely noise)
+      if (transcript.trim().length < 5) {
+        console.log(`[STT] Transcript too short ("${transcript}"), skipping...`);
+        this.isProcessing = false;
         return;
       }
 
@@ -86,7 +95,8 @@ export class VoiceBridge {
       const response = await this.getLLMResponse(transcript);
 
       if (!response) {
-        console.log("Empty LLM response, skipping...");
+        console.log("[LLM] Empty response, skipping...");
+        this.isProcessing = false;
         return;
       }
 
@@ -97,9 +107,11 @@ export class VoiceBridge {
       // Step 3: Text-to-Speech via WebSocket streaming
       this.config.onProcessing?.("tts");
       await this.textToSpeechStream(response);
+
+      console.log("[Pipeline] Finished processing utterance");
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
-      console.error("Pipeline error:", msg);
+      console.error("[Pipeline] Error:", msg);
       this.config.onError?.(msg);
     } finally {
       this.isProcessing = false;

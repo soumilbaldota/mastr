@@ -97,12 +97,24 @@ export class LLMClient {
 
     // Convert messages to Gemini format (user/model)
     // Note: Gemini uses "user" for user messages and "model" for assistant messages
-    const history = messages.slice(0, -1).map((m) => ({
+    // CRITICAL: Gemini requires history to start with "user", not "model"
+    let conversationHistory = messages.slice(0, -1).map((m) => ({
       role: m.role === "assistant" ? ("model" as const) : ("user" as const),
       parts: [{ text: m.content }],
     }));
 
-    const chat = model.startChat({ history });
+    // Fix: If history starts with "model" (assistant greeting), prepend a synthetic user message
+    if (conversationHistory.length > 0 && conversationHistory[0].role === "model") {
+      conversationHistory = [
+        {
+          role: "user" as const,
+          parts: [{ text: "Hi" }],
+        },
+        ...conversationHistory,
+      ];
+    }
+
+    const chat = model.startChat({ history: conversationHistory });
     const lastMessage = messages[messages.length - 1];
 
     if (!lastMessage) return "";

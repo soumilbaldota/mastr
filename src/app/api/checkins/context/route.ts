@@ -41,14 +41,19 @@ export async function GET(request: Request) {
     );
   }
 
-  // Get open blockers reported by this developer
+  // Get open blockers for this developer
+  // Include both: blockers they reported AND blockers assigned to them
   const openBlockers = await prisma.blocker.findMany({
     where: {
-      reportedById: developerId,
       status: "open",
+      OR: [
+        { reportedById: developerId }, // Blockers they reported
+        { assignedToId: developerId }, // Blockers assigned to them to fix
+      ],
     },
     include: {
       task: { select: { name: true } },
+      reportedBy: { select: { name: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -101,6 +106,8 @@ export async function GET(request: Request) {
       description: b.description,
       task: b.task?.name ?? null,
       priority: b.priority,
+      reportedBy: b.reportedBy.name,
+      isAssignedToMe: b.assignedToId === developerId,
     })),
     projectHealth,
   });
