@@ -166,6 +166,28 @@
       "progress": 45,
       "priority": "medium"
     },
+        {
+      "id": "task-11",
+      "name": "Initial Project Kickoff",
+      "description": "Kickoff meeting and project planning with all team members.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-david",
+      "status": "completed",
+      "duration": 1,
+      "progress": 100,
+      "priority": "medium"
+    },
+    {
+      "id": "task-12",
+      "name": "Set Up GitHub Repository",
+      "description": "Create and configure the main GitHub repository for the project.",
+      "projectId": "proj-hpml",
+      "assigneeId": "dev-soumil",
+      "status": "completed",
+      "duration": 1,
+      "progress": 100,
+      "priority": "high"
+    },
     {
       "id": "task-9",
       "name": "vLLM Performance Measurement",

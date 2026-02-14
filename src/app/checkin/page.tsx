@@ -27,11 +27,9 @@ export default async function CheckinPage() {
       <div>
         <h1 className="text-3xl font-bold">Daily Check-in</h1>
         <p className="text-muted-foreground mt-1">
-          Talk to the AI agent about your progress, blockers, and plans
+          Recently Checked-In developers
         </p>
       </div>
-
-      <CheckinDeveloperSelect developers={developers} />
 
       {/* Recent Check-ins */}
       <Card>

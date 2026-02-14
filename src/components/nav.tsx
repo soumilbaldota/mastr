@@ -8,18 +8,16 @@ import {
   Mic,
   AlertTriangle,
   Users,
-  BarChart3,
+  Eye,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemePicker } from "@/components/theme-picker";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/projects", label: "Projects", icon: FolderKanban },
   { href: "/checkin", label: "Check-in", icon: Mic },
   { href: "/blockers", label: "Blockers", icon: AlertTriangle },
   { href: "/team", label: "Team", icon: Users },
-  { href: "/insights", label: "Insights", icon: BarChart3 },
 ];
 
 export function Nav() {
