@@ -1,3 +1,14 @@
+Mastr is an agent first project management platform meant to take regular
+asynchronous updates from developers keeping context on the issues in their 
+projects.
+
+It allows both developers and Project managers to keep on track.
+It has a powerful Critical Path algorithm which allows it compute the most critical 
+tasks to work on so as not to delay the entire project.
+
+Allows dev to prioiritize their day to day workload without scrumming with the team.
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
